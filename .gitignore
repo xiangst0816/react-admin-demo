@@ -1,5 +1,12 @@
-# Object file
-*.o
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Ada Library Information
-*.ali
+# dependencies
+/node_modules
+
+# production
+/dist
+
+# misc
+.DS_Store
+npm-debug.log*
+.idea
