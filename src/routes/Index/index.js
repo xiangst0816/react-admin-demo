@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'dva'
 import classnames from 'classnames'
-import { Link } from 'react-router'
 import { Avatar, Badge, Dropdown, Icon, Input, Layout, Menu } from 'antd'
 import styles from './index.less'
 import dropdownMenu from './dropdown.less'
-
+import { Link } from 'dva/router'
 const Search = Input.Search
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
@@ -94,7 +93,7 @@ const userMenu = (
   </section>
 )
 
-class IndexPage extends React.Component {
+class Page extends React.Component {
   state = {
     collapsed: false
   }
@@ -128,14 +127,16 @@ class IndexPage extends React.Component {
           {/*默认展开第一*/}
 
           <div className={styles.menuGroupName}>Navigation</div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['Dashboard-v1']} defaultOpenKeys={['Dashboard']}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['Dashboard_v1']} defaultOpenKeys={['Dashboard']}>
             <SubMenu key="Dashboard" title={<span><Icon type="area-chart"/><span>Dashboard</span></span>}>
-              <Menu.Item key="Dashboard-v1">Dashboard v1</Menu.Item>
-              <Menu.Item key="Dashboard-v2">
-                Dashboard v2
-                &ensp;
-                <Badge status="success"/>
+              <Menu.Item key="Dashboard_v1">
+                <Link to="/dashboard_v1" onlyActiveOnIndex>Dashboard v1</Link>
               </Menu.Item>
+
+              <Menu.Item key="Dashboard_v2">
+                <Link to="/dashboard_v2" onlyActiveOnIndex>Dashboard v2 &ensp;<Badge status="success"/></Link>
+              </Menu.Item>
+
             </SubMenu>
             <Menu.Item key="Calendar">
               <Icon type="calendar"/>
@@ -253,11 +254,8 @@ class IndexPage extends React.Component {
 
           </Header>
           <Content style={{margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280}}>
-            Content
-
-
-
-
+            {/*路由插入位置*/}
+            {this.props.children}
           </Content>
         </Layout>
       </Layout>
@@ -265,6 +263,6 @@ class IndexPage extends React.Component {
   }
 }
 
-IndexPage.propTypes = {}
+Page.propTypes = {}
 
-export default connect()(IndexPage)
+export default connect()(Page)
