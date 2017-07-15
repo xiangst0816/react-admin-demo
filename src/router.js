@@ -1,30 +1,15 @@
 import React from 'react'
-import { Router } from 'dva/router'
-import PropTypes from 'prop-types'
-import App from './routes/app'
-
-const registerModel = (app, model) => {
-  if (!(app._models.filter(m => m.namespace === model.namespace).length === 1)) {
-    app.model(model)
-  }
-}
+import { Route, Router } from 'dva/router'
+import Index from './routes/Index'
+import Dashboard from './routes/Dashboard'
 
 function RouterConfig ({history}) {
-
   return (
-    <Router history={history} routes={routes}>
-      <Route path="/" component={IndexPage}/>
+    <Router history={history}>
+      <Route path="/" component={Index}/>
       <Route path="/dashboard" component={Dashboard}/>
     </Router>
   )
 }
 
-const Routers = ({history, app}) => {
-
-}
-
-Routers.propTypes = {
-  history: PropTypes.object,
-  app: PropTypes.object
-}
 export default RouterConfig
