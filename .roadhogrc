@@ -1,6 +1,7 @@
 {
   "entry": "src/index.js",
-  "outputPath": "./docs",
+  "outputPath": "./dist",
+  "disableCSSModules": true,
   "env": {
     "development": {
       "extraBabelPlugins": [

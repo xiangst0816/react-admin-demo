@@ -1,94 +1,95 @@
-import React from 'react'
-import { connect } from 'dva'
-import classnames from 'classnames'
 import { Avatar, Badge, Dropdown, Icon, Input, Layout, Menu } from 'antd'
-import styles from './index.less'
-import dropdownMenu from './dropdown.less'
+import classnames from 'classnames'
+import { connect } from 'dva'
 import { Link } from 'dva/router'
+import React from 'react'
+// styles
+import './dropdown.less'
+import './index.less'
+
 const Search = Input.Search
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
 
-const {Header, Sider, Content} = Layout
-console.log(styles)
+const {Header, Sider, Content, Footer} = Layout
 
 const menu = (
-  <section className={classnames(dropdownMenu.menu)}>
-    <section className={dropdownMenu.item}>Project</section>
-    <section className={dropdownMenu.item}>Task</section>
-    <section className={dropdownMenu.item}>User</section>
-    <section className={dropdownMenu.divider}></section>
-    <section className={dropdownMenu.item}>Email</section>
+  <section className='menu'>
+    <section className='item'>Project</section>
+    <section className='item'>Task</section>
+    <section className='item'>User</section>
+    <section className='divider'></section>
+    <section className='item'>Email</section>
   </section>
 )
 
 // languageMenu
 const languageMenu = (
-  <section className={classnames(dropdownMenu.menu)}>
-    <section className={dropdownMenu.item}>
-      <i className={classnames(dropdownMenu.flag, dropdownMenu.en)}></i>
-      <span className={dropdownMenu.name}>English</span>
+  <section className='menu'>
+    <section className='item'>
+      <i className={classnames('flag', 'en')}></i>
+      <span className='name'>English</span>
     </section>
-    <section className={dropdownMenu.item}>
-      <i className={classnames(dropdownMenu.flag, dropdownMenu.ge)}></i>
-      <span className={dropdownMenu.name}>German</span>
+    <section className='item'>
+      <i className={classnames('flag', 'ge')}></i>
+      <span className='name'>German</span>
     </section>
-    <section className={dropdownMenu.item}>
-      <i className={classnames(dropdownMenu.flag, dropdownMenu.it)}></i>
-      <span className={dropdownMenu.name}>Italian</span>
+    <section className='item'>
+      <i className={classnames('flag', 'it')}></i>
+      <span className='name'>Italian</span>
     </section>
-    <section className={dropdownMenu.item}>
-      <i className={classnames(dropdownMenu.flag, dropdownMenu.cn)}></i>
-      <span className={dropdownMenu.name}>简体中文</span>
+    <section className='item'>
+      <i className={classnames('flag', 'cn')}></i>
+      <span className='name'>简体中文</span>
     </section>
   </section>
 )
 
 // noticeMenu
 const noticeMenu = (
-  <section className={classnames(dropdownMenu.menu, dropdownMenu.notice)}>
-    <section className={dropdownMenu.special}>
-      <strong className={styles.name}>You have 2 notifications</strong>
+  <section className={classnames('menu', 'notice')}>
+    <section className='special'>
+      <strong className='name'>You have 2 notifications</strong>
     </section>
-    <section className={dropdownMenu.item}>
-      <Avatar className={dropdownMenu.avatar} src={require('../../assets/avatar.jpg')}/>
-      <div className={dropdownMenu.card}>
+    <section className='item'>
+      <Avatar className='avatar' src={require('../../assets/avatar.jpg')}/>
+      <div className='card'>
         <h4>Antd is awesome!</h4>
         <p>15 minutes ago</p>
       </div>
     </section>
-    <section className={dropdownMenu.item}>
-      <div className={dropdownMenu.card}>
+    <section className='item'>
+      <div className='card'>
         <h4>1.0 initial released</h4>
         <p>1 hour ago</p>
       </div>
     </section>
-    <section className={dropdownMenu.special}>
-      <span className={styles.name}>See all the notifications</span>
-      <Icon className={styles.icon} type='setting'/>
+    <section className='special'>
+      <span className='name'>See all the notifications</span>
+      <Icon className='icon' type='setting'/>
     </section>
   </section>
 )
 
 // userMenu
 const userMenu = (
-  <section className={classnames(dropdownMenu.menu)}>
-    <section className={dropdownMenu.item}>
+  <section className='menu'>
+    <section className='item'>
       <Icon type="setting"/>
-      <span className={dropdownMenu.name}>Settings</span>
+      <span className='name'>Settings</span>
     </section>
-    <section className={dropdownMenu.item}>
+    <section className='item'>
       <Icon type="user"/>
-      <span className={dropdownMenu.name}>Profile</span>
+      <span className='name'>Profile</span>
     </section>
-    <section className={dropdownMenu.item}>
+    <section className='item'>
       <Icon type="question-circle-o"/>
-      <span className={dropdownMenu.name}>Help</span>
+      <span className='name'>Help</span>
     </section>
-    <section className={dropdownMenu.divider}></section>
-    <section className={dropdownMenu.item}>
-      <Icon className={dropdownMenu.icon} type='logout'/>
-      <span className={dropdownMenu.name}>Logout</span>
+    <section className='divider'></section>
+    <section className='item'>
+      <Icon className='icon' type='logout'/>
+      <span className='name'>Logout</span>
     </section>
   </section>
 )
@@ -106,19 +107,19 @@ class Page extends React.Component {
 
   render () {
     return (
-      <Layout id={styles.main}>
+      <Layout id='layout'>
         <Sider
-          className={styles.sider}
+          className='layout__sider'
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
         >
-          <div className={styles.logo}>
-            <div className={styles.inner}></div>
+          <div className='logo'>
+            <div className='inner'></div>
           </div>
 
-          <div className={styles.userBox}>
-            <Avatar className={styles.avatar} size="large" src={require('../../assets/avatar.jpg')}/>
+          <div className='userBox'>
+            <Avatar className='avatar' size="large" src={require('../../assets/avatar.jpg')}/>
             <h5>Hsiang</h5>
             <p>FrontEnd Engineer</p>
           </div>
@@ -126,7 +127,7 @@ class Page extends React.Component {
           {/*<div className={styles.divider}></div>*/}
           {/*默认展开第一*/}
 
-          <div className={styles.menuGroupName}>Navigation</div>
+          <div className='menuGroupName'>Navigation</div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['Dashboard_v1']} defaultOpenKeys={['Dashboard']}>
             <SubMenu key="Dashboard" title={<span><Icon type="area-chart"/><span>Dashboard</span></span>}>
               <Menu.Item key="Dashboard_v1">
@@ -152,7 +153,7 @@ class Page extends React.Component {
             </Menu.Item>
           </Menu>
 
-          <div className={styles.menuGroupName}>Components</div>
+          <div className='menuGroupName'>Components</div>
           <Menu theme="dark" mode="inline" defaultOpenKeys={['Components']}>
             <SubMenu key="Layout" title={<span><Icon type="area-chart"/><span>Layout</span></span>}>
               <Menu.Item key="Layout-Grid">Grid</Menu.Item>
@@ -180,84 +181,86 @@ class Page extends React.Component {
           </Menu>
 
           {/*Your Stuff*/}
-          <div className={styles.menuGroupName}>Your Stuff</div>
+          <div className='menuGroupName'>Your Stuff</div>
           <Menu theme="dark" mode="inline" defaultOpenKeys={['YourStuff']}>
             <Menu.Item key="YourStuff-Profile">Profile</Menu.Item>
             <Menu.Item key="YourStuff-Documents">Documents</Menu.Item>
           </Menu>
-
         </Sider>
-        <Layout>
-          <Header className={styles.header} style={{background: '#fff', padding: 0}}>
-            <section className={styles.header__left}>
-              <section className={styles.header__icon}>
+        <Layout className="layout__content">
+          <Header className='layout__content--header' style={{background: '#fff', padding: 0}}>
+            <section className='header__left'>
+              <section className='header__icon'>
                 <Icon
-                  className={styles.icon}
+                  className='icon'
                   type={classnames({'menu-unfold': this.state.collapsed, 'menu-fold': !this.state.collapsed})}
                   onClick={this.toggle}
                 /></section>
-              <section className={styles.header__icon}>
-                <Icon className={styles.icon} type='user'/>
+              <section className='header__icon'>
+                <Icon className='icon' type='user'/>
               </section>
               <Dropdown overlay={menu} trigger={['click']}>
-                <span className={styles.header__dropdown}>
+                <span className='header__dropdown'>
                 Feature <Icon type="down"/>
               </span>
               </Dropdown>
               <Dropdown overlay={menu} trigger={['click']}>
-                <span className={styles.header__dropdown}>
+                <span className='header__dropdown'>
                 New <Icon type="down"/>
               </span>
               </Dropdown>
 
               {/*搜索*/}
-              <div className={styles.header__input}>
+              <div className='header__input'>
                 <Search
-                  className={styles.input}
+                  className='input'
                   placeholder="input search text"
                   style={{width: 200, height: 30, display: 'flex'}}
                   onSearch={value => console.log(value)}
                 />
               </div>
             </section>
-
-            <section className={styles.header__right}>
+            <section className='header__right'>
               {/*语言*/}
               <Dropdown overlay={languageMenu} trigger={['click']}>
-                <span className={styles.header__dropdown}>
+                <span className='header__dropdown'>
                 Language(EN) <Icon type="down"/>
               </span>
               </Dropdown>
               {/*全屏*/}
-              <section className={styles.header__icon}>
-                <Icon className={styles.icon} type={true ? 'arrows-alt' : 'shrink'}/>
+              <section className='header__icon'>
+                <Icon className='icon' type={true ? 'arrows-alt' : 'shrink'}/>
               </section>
               {/*通知栏*/}
               <Dropdown overlay={noticeMenu} trigger={['click']} placement='bottomCenter'>
-                <section className={styles.header__icon}>
+                <section className='header__icon'>
                   <Badge count={4}>
-                    <Icon className={styles.icon} type="bell"/>
+                    <Icon className='icon' type="bell"/>
                   </Badge>
                 </section>
               </Dropdown>
 
               {/*个人中心*/}
               <Dropdown overlay={userMenu} trigger={['click']}>
-                <section className={styles.header__dropdown}>
+                <section className='header__dropdown'>
                   <span>Hsiang</span>
                   <Icon type="down"/>
-                  <Avatar className={styles.avatar} size="large" src={require('../../assets/avatar.jpg')}/>
+                  <Avatar className='avatar' size="large" src={require('../../assets/avatar.jpg')}/>
                   <Badge dot style={{background: 'green', top: 12, right: -3}}></Badge>
                 </section>
               </Dropdown>
             </section>
-
           </Header>
-          <Content style={{margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280}}>
+          <Content style={{minHeight: 280, height: '100%'}}>
+            {/*<Content style={{margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280}}>*/}
             {/*路由插入位置*/}
             {this.props.children}
           </Content>
+          <Footer style={{textAlign: 'center'}}>
+            Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          </Footer>
         </Layout>
+
       </Layout>
     )
   }

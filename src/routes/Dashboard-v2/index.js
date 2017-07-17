@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'dva'
-import styles from './style.css'
+import styles from './style.less'
 
 function Page () {
   return (
