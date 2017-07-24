@@ -7,7 +7,7 @@ import { Avatar, Badge, Dropdown, Icon, Input, Layout, Menu } from 'antd'
 import classnames from 'classnames'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { AdminRoute } from '../../router'
+import { AdminRoute } from '../../router/index'
 import PropTypes from 'prop-types'
 // 当前页面的 store 响应式数据
 // styles

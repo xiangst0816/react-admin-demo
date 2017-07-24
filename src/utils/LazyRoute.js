@@ -1,43 +1,70 @@
+/**
+ * 问题是资源下载了但是还是现实loading, 这个方案不好
+ * !!!abandon!!!
+ * !!!abandon!!!
+ * !!!abandon!!!
+ * */
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+const NOOP = () => {}
+
+class DefaultLoadingComponent extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired
+  }
+
+  render () {
+    console.log('DEFAULT_LOADING_COMPONENT')
+    console.log(this.props)
+    let {location} = this.props
+    return (
+      <section style={{textAlign: 'center'}}>
+        <h2>Loading</h2>
+        <p>Please Waiting For Pages</p>
+        <small>{location.pathname}</small>
+      </section>
+    )
+  }
+}
 
 export default class LazyRoute extends Component {
 
+  static propTypes = {
+    component: PropTypes.object.isRequired,
+    loadingComponent: PropTypes.object,
+    location: PropTypes.object.isRequired,
+    onBeforeEnter: PropTypes.func,
+    onAfterEnter: PropTypes.func
+  }
+
   constructor (props) {
     super(props)
-    this.state = {
-      loaded: false,
-      showLoader: false
-    }
-    console.log('LazyRoute')
-    console.log(props)
-
-
-
-    // window.setTimeout(() => {
-    //   this.release()
-    // }, 3000)
+    this.state = {loaded: false}
+    this.onBeforeEnter = props.onBeforeEnter || NOOP
+    this.onAfterEnter = props.onAfterEnter || NOOP
+    this.finalComponent = this.loadingComponent = props.loadingComponent || DefaultLoadingComponent
   }
 
   componentDidMount () {
-
-    this.release = this.props.history.block()
-
     this.props.component.then((module) => {
       window.setTimeout(() => {
-        this.component = module.default
+        this.finalComponent = module.default
         this.setState({loaded: true})
-        this.release()
       }, 0)
     })
   }
 
   render () {
     const {loaded} = this.state
-    const Component = this.component
+    const FinalComponent = this.finalComponent
+    const LoadingComponent = this.loadingComponent
+
     if (loaded) {
-      return <Component {...this.props} />
+      this.onAfterEnter(this.props.location)
+      return <FinalComponent {...this.props} />
     } else {
-      return (<div />)
+      this.onBeforeEnter(this.props.location)
+      return (<LoadingComponent {...this.props} />)
     }
   }
 }
