@@ -7,8 +7,8 @@ import PropTypes from 'prop-types'
 class Page extends React.Component {
 
   static propTypes = {
-    appStore: PropTypes.object.isRequired,
-    rootStore: PropTypes.object.isRequired
+    $appStore: PropTypes.object.isRequired,
+    $rootStore: PropTypes.object.isRequired
   }
 
   // componentWillMount () {

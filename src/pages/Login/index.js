@@ -7,15 +7,15 @@ import LazyRoute from 'lazy-route'
 import { inject, observer } from 'mobx-react'
 import PropTypes from 'prop-types'
 
-@inject('appStore')
+@inject('$appStore')
 @observer
 class Login extends React.Component {
   static propTypes = {
-    appStore: PropTypes.object.isRequired
+    $appStore: PropTypes.object.isRequired
   }
   render () {
     const {from} = {from: {pathname: '/admin'}}
-    let {authenticated, authenticating, authenticate} = this.props.appStore
+    let {authenticated, authenticating, authenticate} = this.props.$appStore
 
     let authenticatingText = authenticating ? 'authenticating' : 'none'
 
@@ -35,14 +35,14 @@ class Login extends React.Component {
   }
 }
 
-@inject('appStore')
+@inject('$appStore')
 @observer
 class PrivateRoute extends React.Component {
   static propTypes = {
-    appStore: PropTypes.object.isRequired
+    $appStore: PropTypes.object.isRequired
   }
   render ({...rest}) {
-    let {authenticated} = this.props.appStore
+    let {authenticated} = this.props.$appStore
     if (authenticated) {
       return (
         <Route {...rest} render={props => (

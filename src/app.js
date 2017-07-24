@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import { Provider} from 'mobx-react'
+import { Provider } from 'mobx-react'
 import AppStore from './stores/AppStore'
 import RootStore from './stores/RootStore'
 import { MainRoute } from './router'
@@ -18,11 +18,13 @@ const rootStore = new RootStore()
 // const appLocale = window.appLocale
 
 // addLocaleData(appLocale.data)
+
+// 全局store前面加 '$' 标识符
 class App extends React.Component {
   render () {
     return (
       <LocaleProvider locale={enUS}>
-        <Provider rootStore={rootStore} appStore={appStore}>
+        <Provider $rootStore={rootStore} $appStore={appStore}>
           <MainRoute {...this.props} />
         </Provider>
       </LocaleProvider>

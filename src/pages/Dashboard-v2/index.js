@@ -1,15 +1,14 @@
 import React from 'react'
 import styles from './style.less'
 import { inject, observer } from 'mobx-react'
-import Footer from '../../components/Footer'
+// import Footer from '../../components/Footer'
 import PropTypes from 'prop-types'
-import { Pagination } from 'antd'
-@inject('rootStore', 'appStore')
+@inject('$rootStore', '$appStore')
 @observer
 class Page extends React.Component {
   static propTypes = {
-    appStore: PropTypes.object.isRequired,
-    rootStore: PropTypes.object.isRequired
+    $appStore: PropTypes.object.isRequired,
+    $rootStore: PropTypes.object.isRequired
   }
 
   render () {
