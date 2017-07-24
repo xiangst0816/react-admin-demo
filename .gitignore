@@ -1,12 +1,16 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-
-# production
-/dist
-
-# misc
 .DS_Store
+node_modules/
+dist/
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+test/unit/coverage
+test/e2e/reports
+selenium-debug.log
+
+# Editor directories and files
 .idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
