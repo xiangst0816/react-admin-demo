@@ -30,12 +30,28 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      &.hide {
+        display: none;
+      }
+      &.asideFolded {
+        height: 42px;
+        .avatar {
+          height: 30px;
+          width: 30px;
+          border-radius: 100%;
+          margin-bottom: 0;
+        }
+        h5, p {
+          display: none;
+        }
+      }
       .avatar {
         height: 96px;
         width: 96px;
         border-radius: 100%;
         margin-bottom: 10px;
       }
+
       h5 {
         font-size: 14px;
         color: #fff;
@@ -142,11 +158,11 @@
       z-index: 1;
 
     }
-    .layout__content--footer{
+    .layout__content--footer {
       z-index: 10;
       position: relative;
       height: 50px;
-      padding:0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;

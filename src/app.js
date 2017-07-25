@@ -8,8 +8,8 @@ import AppStore from './stores/AppStore'
 import RootStore from './stores/RootStore'
 import { MainRoute } from './router/index'
 import { LocaleProvider } from 'antd'
-// import { addLocaleData, IntlProvider } from 'react-intl'
 import enUS from 'antd/lib/locale-provider/en_US'
+// import { addLocaleData, IntlProvider } from 'react-intl'
 // import zhTW from 'antd/lib/locale-provider/zh_TW';
 
 // 根状态, 比如当前应用的整体信息

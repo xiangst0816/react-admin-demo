@@ -9,6 +9,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { AdminRoute } from '../../router/index'
 import PropTypes from 'prop-types'
+
+import LanguageMenu from './LanguageMenu'
+import NoticeMenu from './NoticeMenu'
+import UserMenu from './UserMenu'
 // 当前页面的 store 响应式数据
 // styles
 import './style.less'
@@ -24,77 +28,6 @@ const menu = (
     <section className='item'>User</section>
     <section className='divider'/>
     <section className='item'>Email</section>
-  </section>
-)
-
-// languageMenu
-const languageMenu = (
-  <section className='menu'>
-    <section className='item'>
-      <i className={classnames('flag', 'en')}/>
-      <span className='name'>English</span>
-    </section>
-    <section className='item'>
-      <i className={classnames('flag', 'ge')}/>
-      <span className='name'>German</span>
-    </section>
-    <section className='item'>
-      <i className={classnames('flag', 'it')}/>
-      <span className='name'>Italian</span>
-    </section>
-    <section className='item'>
-      <i className={classnames('flag', 'cn')}/>
-      <span className='name'>简体中文</span>
-    </section>
-  </section>
-)
-
-// noticeMenu
-const noticeMenu = (
-  <section className={classnames('menu', 'notice')}>
-    <section className='special'>
-      <strong className='name'>You have 2 notifications</strong>
-    </section>
-    <section className='item'>
-      <Avatar className='avatar' src={require('../../assets/avatar.jpg')}/>
-      <div className='card'>
-        <h4>Antd is awesome!</h4>
-        <p>15 minutes ago</p>
-      </div>
-    </section>
-    <section className='item'>
-      <div className='card'>
-        <h4>1.0 initial released</h4>
-        <p>1 hour ago</p>
-      </div>
-    </section>
-    <section className='special'>
-      <span className='name'>See all the notifications</span>
-      <Icon className='icon' type='setting'/>
-    </section>
-  </section>
-)
-
-// userMenu
-const userMenu = (
-  <section className='menu'>
-    <section className='item'>
-      <Icon type='setting'/>
-      <span className='name'>Settings</span>
-    </section>
-    <section className='item'>
-      <Icon type='user'/>
-      <span className='name'>Profile</span>
-    </section>
-    <section className='item'>
-      <Icon type='question-circle-o'/>
-      <span className='name'>Help</span>
-    </section>
-    <section className='divider'/>
-    <section className='item'>
-      <Icon className='icon' type='logout'/>
-      <span className='name'>Logout</span>
-    </section>
   </section>
 )
 
@@ -114,6 +47,7 @@ class Index extends React.Component {
     const {location, $rootStore} = this.props
     let pathName = location.pathname
     let {asideFolded, asideToggle} = $rootStore
+    let {userFolded, userToggle} = $rootStore
     let {isFullscreen, fullscreenToggle} = $rootStore
     return (
       <Layout id='layout'>
@@ -127,8 +61,8 @@ class Index extends React.Component {
             <div className='inner'/>
           </div>
 
-          <div className='userBox'>
-            <Avatar className='avatar' size='large' src={require('../../assets/avatar.jpg')}/>
+          <div className={classnames('userBox', !asideFolded ? '' : 'asideFolded',userFolded ? '' : 'hide')}>
+            <Avatar className='avatar' src={require('../../assets/avatar.jpg')}/>
             <h5>Hsiang</h5>
             <p>FrontEnd Engineer</p>
           </div>
@@ -136,7 +70,8 @@ class Index extends React.Component {
           {/* <div className={styles.divider}></div> */}
           {/* 默认展开第一 */}
 
-          <div className='menuGroupName'>Navigation</div>
+          {!asideFolded ? <div className='menuGroupName'>Navigation</div> : ''}
+
           <Menu theme='dark' mode='inline'
                 selectedKeys={[pathName]}
                 defaultSelectedKeys={[pathName]}
@@ -165,7 +100,8 @@ class Index extends React.Component {
             </Menu.Item>
           </Menu>
 
-          <div className='menuGroupName'>Components</div>
+          {!asideFolded ? <div className='menuGroupName'>Components</div> : ''}
+
           <Menu theme='dark' mode='inline' defaultOpenKeys={['Components']}>
             <SubMenu key='Layout' title={<span><Icon type='area-chart'/><span>Layout</span></span>}>
               <Menu.Item key='Layout-Grid'>Grid</Menu.Item>
@@ -193,7 +129,8 @@ class Index extends React.Component {
           </Menu>
 
           {/* Your Stuff */}
-          <div className='menuGroupName'>Your Stuff</div>
+          {!asideFolded ? <div className='menuGroupName'>Your Stuff</div> : ''}
+
           <Menu theme='dark' mode='inline' defaultOpenKeys={['YourStuff']}>
             <Menu.Item key='YourStuff-Profile'>Profile</Menu.Item>
             <Menu.Item key='YourStuff-Documents'>Documents</Menu.Item>
@@ -209,7 +146,7 @@ class Index extends React.Component {
                   onClick={asideToggle}
                 /></section>
               <section className='header__icon'>
-                <Icon className='icon' type='user'/>
+                <Icon className='icon' type='user' onClick={userToggle}/>
               </section>
               <Dropdown overlay={menu} trigger={['click']}>
                 <span className='header__dropdown'>
@@ -234,17 +171,13 @@ class Index extends React.Component {
             </section>
             <section className='header__right'>
               {/* 语言 */}
-              <Dropdown overlay={languageMenu} trigger={['click']}>
-                <span className='header__dropdown'>
-                Language(EN) <Icon type='down'/>
-                </span>
-              </Dropdown>
+              <LanguageMenu {...this.props}/>
               {/* 全屏 */}
               <section className='header__icon' onClick={fullscreenToggle}>
                 <Icon className='icon' type={isFullscreen ? 'arrows-alt' : 'shrink'}/>
               </section>
               {/* 通知栏 */}
-              <Dropdown overlay={noticeMenu} trigger={['click']} placement='bottomCenter'>
+              <Dropdown overlay={NoticeMenu} trigger={['click']} placement='bottomCenter'>
                 <section className='header__icon'>
                   <Badge count={4}>
                     <Icon className='icon' type='bell'/>
@@ -253,7 +186,7 @@ class Index extends React.Component {
               </Dropdown>
 
               {/* 个人中心 */}
-              <Dropdown overlay={userMenu} trigger={['click']}>
+              <Dropdown overlay={UserMenu} trigger={['click']}>
                 <section className='header__dropdown'>
                   <span>Hsiang</span>
                   <Icon type='down'/>

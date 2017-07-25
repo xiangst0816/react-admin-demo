@@ -5,7 +5,7 @@
  * 包括:
  * 主题/menu状态/...等
  * */
-import { action, extendObservable, toJS } from 'mobx'
+import { action, computed, extendObservable, toJS } from 'mobx'
 
 // 默认配置, 属性全部为响应式, 如果check不通过则使用默认配置
 const DEFAULT_SETTINGS = {
@@ -16,9 +16,11 @@ const DEFAULT_SETTINGS = {
   headerFixed: true,                    // 导航条 header 是否固定
   asideFixed: true,                     // aside 是否固定
   asideFolded: false,                   // aside 是否折叠
+  userFolded: false,                    // user 是否折叠
   asideDock: false,                     // aside 是否固定 ?
   container: false,                     // 是否是 container 模式
-  isFullscreen: false                   // 是否是 container 模式
+  isFullscreen: false,                   // 是否是 container 模式
+  language: 'enUS' // enUS zhCN
 }
 
 export default class AppState {
@@ -43,13 +45,41 @@ export default class AppState {
     }
   }
 
+  // @computed get languageLength () {
+  //   return this.language.length
+  // }
+
+  // @computed get langText  ()  {
+  //   if (this.language === 'enUS') {
+  //     return 'English'
+  //   } else if (this.language === 'zhCN') {
+  //     return '简体中文'
+  //   } else {
+  //     return '未知'
+  //   }
+  // }
+
+  @action setLanguage (lang) {
+    console.log(lang)
+    this.language = lang
+    this.recordSettingsToLocalStorage()
+  }
+
   // 只能这么写
-  @action asideToggle = () => {
+  @action userToggle () {
+    this.userFolded = !this.userFolded
+    this.recordSettingsToLocalStorage()
+  }
+
+  // 只能这么写
+  @action asideToggle () {
+    console.log(this)
+    debugger
     this.asideFolded = !this.asideFolded
     this.recordSettingsToLocalStorage()
   }
 
-  @action fullscreenToggle = () => {
+  @action fullscreenToggle () {
     this.isFullscreen = !this.isFullscreen
     this.recordSettingsToLocalStorage()
   }
