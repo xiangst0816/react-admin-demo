@@ -1,6 +1,3 @@
-/**
- * Created by Hsiang on 2017/7/24.
- */
 import React from 'react'
 import { Router } from 'react-router'
 import { Route, Switch } from 'react-router-dom'
@@ -10,9 +7,9 @@ import { Provider } from 'mobx-react'
 // mobx-react-router
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router'
 import createHashHistory from 'history/createHashHistory'
-const browserHistory = createHashHistory()
+const hashHistory = createHashHistory()
 const routingStore = new RouterStore()
-const history = syncHistoryWithStore(browserHistory, routingStore)
+const history = syncHistoryWithStore(hashHistory, routingStore)
 
 // main route to app
 export class MainRoute extends React.Component {

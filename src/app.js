@@ -15,6 +15,12 @@ import enUS from 'antd/lib/locale-provider/en_US'
 // 根状态, 比如当前应用的整体信息
 const appStore = new AppStore()
 const rootStore = new RootStore()
+
+import config from './config'
+console.debug('当前的配置信息(Mock于此同步):')
+console.debug(config)
+
+window.rootStore = rootStore
 // const appLocale = window.appLocale
 
 // addLocaleData(appLocale.data)

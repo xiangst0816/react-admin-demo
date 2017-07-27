@@ -33,7 +33,7 @@ module.exports = {
       //   }
       // },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },

@@ -13,6 +13,7 @@ class Login extends React.Component {
   static propTypes = {
     $appStore: PropTypes.object.isRequired
   }
+
   render () {
     const {from} = {from: {pathname: '/admin'}}
     let {authenticated, authenticating, authenticate} = this.props.$appStore
@@ -21,7 +22,7 @@ class Login extends React.Component {
 
     if (authenticated) {
       return (
-        <Redirect to={from} />
+        <Redirect to={from}/>
       )
     }
 
@@ -41,13 +42,14 @@ class PrivateRoute extends React.Component {
   static propTypes = {
     $appStore: PropTypes.object.isRequired
   }
+
   render ({...rest}) {
     let {authenticated} = this.props.$appStore
     if (authenticated) {
       return (
         <Route {...rest} render={props => (
-          <LazyRoute {...props} component={import('../Index')} />
-        )} />
+          <LazyRoute {...props} component={import('../Index/index.js')}/>
+        )}/>
       )
     } else {
       return (
@@ -55,8 +57,8 @@ class PrivateRoute extends React.Component {
           <Redirect to={{
             pathname: '/login',
             state: {from: props.location}
-          }} />
-        )} />
+          }}/>
+        )}/>
       )
     }
   }

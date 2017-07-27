@@ -7,6 +7,7 @@
  * */
 import { action, computed, extendObservable, toJS } from 'mobx'
 
+
 // 默认配置, 属性全部为响应式, 如果check不通过则使用默认配置
 const DEFAULT_SETTINGS = {
   themeID: '1',                         // 主题ID
@@ -23,7 +24,8 @@ const DEFAULT_SETTINGS = {
   language: 'enUS' // enUS zhCN
 }
 
-export default class AppState {
+export default class RootStore {
+
   constructor () {
     let settings = window.localStorage.getItem('settings')
     if (settings) {
@@ -43,43 +45,49 @@ export default class AppState {
     } else {
       this.useDefaultSettings()
     }
+
+    // 绑定当前class的方法
+    this.setLanguage = this::this.setLanguage
+    this.userToggle = this::this.userToggle
+    this.asideToggle = this::this.asideToggle
+    this.fullscreenToggle = this::this.fullscreenToggle
+    this.fullscreenToggle = this::this.fullscreenToggle
   }
 
-  // @computed get languageLength () {
-  //   return this.language.length
-  // }
+  @computed
+  get langText () {
+    if (this.language === 'enUS') {
+      return 'English'
+    } else if (this.language === 'zhCN') {
+      return '简体中文'
+    } else {
+      return '未知'
+    }
+  }
 
-  // @computed get langText  ()  {
-  //   if (this.language === 'enUS') {
-  //     return 'English'
-  //   } else if (this.language === 'zhCN') {
-  //     return '简体中文'
-  //   } else {
-  //     return '未知'
-  //   }
-  // }
-
-  @action setLanguage (lang) {
-    console.log(lang)
+  @action
+  setLanguage (lang) {
     this.language = lang
     this.recordSettingsToLocalStorage()
   }
 
   // 只能这么写
-  @action userToggle () {
+  @action
+  userToggle () {
     this.userFolded = !this.userFolded
     this.recordSettingsToLocalStorage()
   }
 
   // 只能这么写
-  @action asideToggle () {
+  @action
+  asideToggle () {
     console.log(this)
-    debugger
     this.asideFolded = !this.asideFolded
     this.recordSettingsToLocalStorage()
   }
 
-  @action fullscreenToggle () {
+  @action
+  fullscreenToggle () {
     this.isFullscreen = !this.isFullscreen
     this.recordSettingsToLocalStorage()
   }

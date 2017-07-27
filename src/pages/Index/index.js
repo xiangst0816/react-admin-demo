@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { AdminRoute } from '../../router/index'
 import PropTypes from 'prop-types'
 
-import LanguageMenu from './LanguageMenu'
+import LanguageMenu from './LanguageMenu/index'
 import NoticeMenu from './NoticeMenu'
 import UserMenu from './UserMenu'
 // 当前页面的 store 响应式数据
@@ -43,14 +43,29 @@ class Index extends React.Component {
     $rootStore: PropTypes.object.isRequired
   }
 
+  constructor (props) {
+    super(props)
+  }
+
+  renderDevTool () {
+    if (process.env.NODE_ENV !== 'production') {
+      return require('mobx-react-devtools').default
+    } else {
+      return () => (<div />)
+    }
+  }
+
   render () {
-    const {location, $rootStore} = this.props
+    const {location} = this.props
     let pathName = location.pathname
-    let {asideFolded, asideToggle} = $rootStore
-    let {userFolded, userToggle} = $rootStore
-    let {isFullscreen, fullscreenToggle} = $rootStore
+    let {asideFolded, asideToggle} = this.props.$rootStore
+    let {userFolded, userToggle} = this.props.$rootStore
+    let {isFullscreen, fullscreenToggle} = this.props.$rootStore
+    let DevTools = this.renderDevTool()
+
     return (
       <Layout id='layout'>
+        <DevTools />
         <Sider
           className='layout__sider'
           trigger={null}
@@ -61,7 +76,7 @@ class Index extends React.Component {
             <div className='inner'/>
           </div>
 
-          <div className={classnames('userBox', !asideFolded ? '' : 'asideFolded',userFolded ? '' : 'hide')}>
+          <div className={classnames('userBox', !asideFolded ? '' : 'asideFolded', userFolded ? '' : 'hide')}>
             <Avatar className='avatar' src={require('../../assets/avatar.jpg')}/>
             <h5>Hsiang</h5>
             <p>FrontEnd Engineer</p>
@@ -171,9 +186,9 @@ class Index extends React.Component {
             </section>
             <section className='header__right'>
               {/* 语言 */}
-              <LanguageMenu {...this.props}/>
+              <LanguageMenu {...this.props} />
               {/* 全屏 */}
-              <section className='header__icon' onClick={fullscreenToggle}>
+              <section className='header__icon' onClick={() => fullscreenToggle()}>
                 <Icon className='icon' type={isFullscreen ? 'arrows-alt' : 'shrink'}/>
               </section>
               {/* 通知栏 */}

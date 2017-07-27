@@ -6,6 +6,9 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import './styles/main.scss'
 import App from './app'
+import { useStrict } from 'mobx'
+// enable MobX strict mode
+useStrict(true)
 
 const start = (Component) => {
   render(

@@ -12,6 +12,25 @@
 - SPA模式, 不支持同构应用
 - -测试部分未完成
 
+
+## Contains
+
+- [x] [React](https://facebook.github.io/react/) 15.6
+- [x] [React Router](https://github.com/ReactTraining/react-router) 4.1
+- [x] [Mobx](https://github.com/mobxjs/mobx)
+- [x] [Mobx React](https://github.com/mobxjs/mobx-react)
+- [x] [Mobx React Router](https://github.com/alisd23/mobx-react-router/)
+- [x] [Mobx React Devtools](https://github.com/mobxjs/mobx-react-devtools)
+
+### Build tools
+
+- [x] [Webpack](https://webpack.github.io) 3.0
+  - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
+  - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
+- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader)
+- [x] [ExtractText Plugin](https://github.com/webpack/extract-text-webpack-plugin)
+- [x] [HTML Webpack Plugin](https://github.com/ampedandwired/html-webpack-plugin)
+
 ## Build Setup
 
 ``` bash

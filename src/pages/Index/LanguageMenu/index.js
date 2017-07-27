@@ -4,9 +4,9 @@
 import { inject, observer } from 'mobx-react'
 import React from 'react'
 import classnames from 'classnames'
+// Menu
 import { Dropdown, Icon } from 'antd'
 import PropTypes from 'prop-types'
-// Menu
 
 @inject('$rootStore')
 @observer
@@ -19,38 +19,27 @@ export default class LanguageMenu extends React.Component {
     super(props)
   }
 
-  componentWillMount () {
-    // let {languageLength} = this.props.$rootStore
-    // this.languageLength = languageLength
-  }
-  changeLanguage (lang) {
-    console.log(lang)
-    this.props.$rootStore.setLanguage(lang)
-  }
-
   render () {
-    let {language} = this.props.$rootStore
+    let {langText, setLanguage} = this.props.$rootStore
 
-    const Menu = (
+    const MenuOptions = (
       <section className='menu'>
-        <section className='item' onClick={this.changeLanguage('enUS')}>
-          <i className={classnames('flag', 'en')}/>
-          <p>{language}</p>
+        <section className='item' onClick={() => setLanguage('enUS')}>
+          <i className={classnames('flag', 'en')} />
           <span className='name'>English</span>
         </section>
-        <section className='item' onClick={this.changeLanguage('znCN')}>
-          <i className={classnames('flag', 'cn')}/>
+        <section className='item' onClick={() => setLanguage('zhCN')}>
+          <i className={classnames('flag', 'cn')} />
           <span className='name'>简体中文</span>
         </section>
       </section>
     )
 
-
     return (
-      <Dropdown overlay={Menu} trigger={['click']}>
-          <span className='header__dropdown'>
-            {language} <Icon type='down'/>
-          </span>
+      <Dropdown overlay={MenuOptions} trigger={['click']}>
+        <span className='header__dropdown'>
+          {langText} <Icon type='down' />
+        </span>
       </Dropdown>
     )
   }

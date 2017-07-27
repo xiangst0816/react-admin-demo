@@ -17,6 +17,45 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px;
+      height: 87px;
+
+      .header__left {
+        h1 {
+          height: 26px;
+          line-height: 26PX;
+
+        }
+        small {
+          height: 17px;
+          line-height: 17PX;
+
+        }
+      }
+      .header__right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        .statisticsBox:first-child {
+          margin-right: 15px;
+        }
+        .statisticsBox {
+          p {
+            height: 20px;
+            width: 100px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            small {
+              margin-left: 5px;
+            }
+          }
+          section {
+            height: 20px;
+            width: 100px;
+          }
+        }
+
+      }
     }
     .detail {
       padding: 20px;
@@ -29,6 +68,7 @@
         user-select: none;
         border-radius: 2px;
         height: 90px;
+        overflow: hidden;
         h1 {
           font-weight: 200;
           font-size: 32px;
@@ -87,12 +127,11 @@
           }
         }
         &.b5 {
-          background-color: #e0e7e9;
+          background-color: #e3eaec;
           padding: 0;
           display: flex;
           justify-content: flex-start;
           align-items: center;
-
           .b5Chart {
             height: 90px;
             width: 90px;
@@ -100,7 +139,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            #c1 {
+            background-color: #dce6e9;
+            .c1 {
               height: 40px;
               width: 40px;
             }
@@ -115,8 +155,20 @@
               color: #98a6ad;
             }
           }
-
         }
+
+        &.b6 {
+          height: 310px;
+          padding: 15px;
+          h3 {
+            color: #98a6ad;
+            font-size: 16px;
+            text-align: left;
+            font-weight: 300;
+            margin-bottom: 5px;
+          }
+        }
+
       }
     }
   }
